@@ -3,9 +3,10 @@ let SVG = require("./lib/svg");
 const Text = require("./lib/text")
 const {Shape, Circle, Triangle, Square} = require("./lib/shapes")
 
-let shapeChoice = new SVG("circle")
+let shapeChoice = new SVG("triangle")
 let text = new Text("CYN", "purple")
-let shapeColor = new Shape("green", "black", "5")
+let shapeColor = new Shape("blue", "black", "5")
+
 
 let writeData = `<svg version="1.1"
          width="300" height="200"
