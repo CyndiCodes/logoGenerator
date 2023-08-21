@@ -13,26 +13,40 @@ inquirer
       choices: ['triangle', 'square', 'circle'],
       filter(val) {
         return val;
-      }
-    },
-    {
-      type: 'list',
-      name: 'logoColor',
-      message: 'What color would you like your logo background?',
-      choices: ['yellow', 'blue', 'purple'],
-      filter(val) {
-        return val;
-      }
-    },
-    {
-    type: 'list',
-    name: 'borderColor',
-    message: 'What color would you like your border?',
-    choices: ['black', 'red', 'blue'],
-    filter(val) {
-      return val;
     }
     },
+    // {
+    //   type: 'list',
+    //   name: 'addCircleRadius',
+    //   message: 'Select a border radius?',
+    //   choices: ['50', '60', '70'],
+    //   when: answers => answers.logoShape === 'circle'
+    // },
+    // need to review documentation to get the correct syntax
+    {
+      type: 'input',
+      name: 'logoColor',
+      message: 'What color would you like your logo (use 6 digit hex code)?',
+      // see readme for code source
+      validate: function isHexColor (hex) {
+        return typeof hex === 'string'
+            && hex.length === 6
+            && !isNaN(Number('0x' + hex))
+      }
+    },
+
+     {
+      type: 'input',
+      name: 'borderColor',
+      message: 'What color would you like your border (use 6 digit hex code)?',
+      // see readme for code source
+      validate: function isHexColor (hex) {
+        return typeof hex === 'string'
+            && hex.length === 6
+            && !isNaN(Number('0x' + hex))
+      }
+    },
+
     {
     type: 'list',
     name: 'borderWidth',
@@ -46,16 +60,26 @@ inquirer
     type: 'input',
     name: 'textInput',
     message: 'Use 3 characters you would like to use for logo:',
-    },
-    {
-    type: 'list',
-    name: 'textColor',
-    message: 'what color would you like your text to be?',
-    choices: ['black', 'red', 'white'],
-    filter(val) {
-      return val;
+    validate: function (userInput){
+      if(userInput.length <= 3 && userInput.length >=1){
+        return true;
+      }else{
+        return "Please enter 1-3 characters"
+      }
     }
-  },
+    },
+    
+    {
+      type: 'input',
+      name: 'textColor',
+      message: 'What color would you like your text (use 6 digit hex code)?',
+      // see readme for code source
+      validate: function isHexColor (hex) {
+        return typeof hex === 'string'
+            && hex.length === 6
+            && !isNaN(Number('0x' + hex))
+      }
+    },
   ])
   .then(answers => {
     let shapeChoice = new SVG(answers.logoShape)
