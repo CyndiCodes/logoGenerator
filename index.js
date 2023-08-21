@@ -4,9 +4,6 @@ let SVG = require("./lib/svg");
 const Text = require("./lib/text")
 const {Shape, Circle, Triangle, Square} = require("./lib/shapes")
 
-
-
-
 inquirer
   .prompt([
     {
@@ -73,7 +70,7 @@ inquirer
     ${textChoices.render()}
 
    </svg>`
-   
+
    fs.writeFile("shape.svg", writeData, function(err){
     if(err)
     console.log(err)
